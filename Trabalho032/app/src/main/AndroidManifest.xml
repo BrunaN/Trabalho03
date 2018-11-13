@@ -34,6 +34,7 @@
         </receiver>
 
         <service android:name="DownloadService" />
+        <service android:name="MediaPlayerService"/>
         <service android:name="InternetNotificationService" />
         <service android:name="BindedService"/>
 

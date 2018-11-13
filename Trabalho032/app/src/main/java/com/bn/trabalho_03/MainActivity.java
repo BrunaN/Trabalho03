@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
+
+    private View buttonStart;
+    private View buttonStop;
 
     private BindedService bindedService;
     private boolean mBound = false;
@@ -37,9 +41,36 @@ public class MainActivity extends AppCompatActivity {
         Button btnDownload = findViewById(R.id.buttonDownload);
         btnDownload.setOnClickListener(onDownloadListener());
 
+        buttonStart = findViewById(R.id.button_start);
+        buttonStop = findViewById(R.id.button_stop);
+
+        buttonStart.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                startPlayer(view);
+            }
+        });
+
+        buttonStop.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                stopPlayer(view);
+            }
+        });
+
         Intent i = new Intent(this, InternetNotificationService.class);
         startService(i);
         InternetNotificationService.mainActivity = this;
+
+    }
+
+    public void startPlayer(View view){
+        Intent intent = new Intent(this, MediaPlayerService.class);
+        startService(intent);
+    }
+
+    public void stopPlayer(View view){
+        stopService(new Intent(this, MediaPlayerService.class));
     }
 
     private View.OnClickListener onDownloadListener() {
