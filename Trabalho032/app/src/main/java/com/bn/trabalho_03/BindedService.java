@@ -37,8 +37,6 @@ public class BindedService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         InternetThread internetThread = new InternetThread();
         internetThread.start();
-        String value = "entrou aqui";
-        Log.d("nome", "value is: " + value);
         change++;
 
         return super.onStartCommand(intent, flags, startId);

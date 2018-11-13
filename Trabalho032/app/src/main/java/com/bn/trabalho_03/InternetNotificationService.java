@@ -27,9 +27,6 @@ public class InternetNotificationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int sartId){
-        String value = "aqui";
-        Log.d("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "value is: " + value);
-
         readData();
         return Service.START_NOT_STICKY;
     }

@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
     private void requestPermission() {
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            Toast.makeText(this, "Write External Storage permission allows us to do store images. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
+            Log.e("value", "Permission Granted, Now you can use local drive .");
         } else {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
         }
@@ -175,25 +175,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void notification(){
 
-        //NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        //NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-        //        .setTicker("teste")
-        //       .setSmallIcon(R.drawable.ic_notifications_black_24dp)
-        //        .setContentTitle("Notificação da Bruninha")
-        //         .setContentText("Bruninha => Notificação de conexão com a Internet");
-
-        //Notification notification = mBuilder.build();
-
-        //mNotificationManager.notify(R.drawable.ic_notifications_black_24dp, notification);
-
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+                .setTicker("teste")
+                .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+                .setContentTitle("Notificação da Bruninha")
+                .setContentText("Bruninha => Notificação de conexão com a Internet");
+
+        Notification notification = mBuilder.build();
+
+        mNotificationManager.notify(R.drawable.ic_notifications_black_24dp, notification);
+
+        /*NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_notifications_black_24dp)
                 .setContentTitle("Notificação da Bruninha")
                 .setContentText("Bruninha => Notificação de conexão com a Internet")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(001, mBuilder.build());
+        mNotificationManager.notify(001, mBuilder.build());*/
 
     }
 
