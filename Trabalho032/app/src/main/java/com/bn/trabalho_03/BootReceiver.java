@@ -10,15 +10,17 @@ public class BootReceiver extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())){
 
-            String value = "eeeeeeeeeeeeeentrou aqui";
-            Log.d("nome", "value is: " + value);
-
-            context.startService(new Intent(context, BindedService.class));
-
-            Toast toast = Toast.makeText(context, "Broadcast inizializando service", Toast.LENGTH_LONG);
-            toast.show();
+        if(intent.getAction().equals(Intent.ACTION_SCREEN_ON)){
+            Log.d("nome", "ACTION_SCREEN_ON");
+        }else if(intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)){
+            Log.d("nome", "ACTION_BOOT_COMPLETED");
+        }else{
+            return;
         }
+
+        context.startService(new Intent(context, BindedService.class));
+        Toast.makeText(context, "Broadcast inizializando service", Toast.LENGTH_LONG).show();
+
     }
 }

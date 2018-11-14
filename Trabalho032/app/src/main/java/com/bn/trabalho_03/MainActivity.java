@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BindedService bindedService;
     private boolean mBound = false;
+    private BroadcastReceiver bootReceiver;
 
     private TextView downloadStatus;
 
@@ -40,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, InternetNotificationService.class);
         startService(i);
         InternetNotificationService.mainActivity = this;
+
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BOOT_COMPLETED);
+        intentFilter.addAction(Intent.ACTION_SCREEN_ON);
+        bootReceiver = new BootReceiver();
+        registerReceiver(bootReceiver, intentFilter);
     }
 
     private View.OnClickListener onDownloadListener() {
@@ -149,5 +155,14 @@ public class MainActivity extends AppCompatActivity {
             mBound = false;
         }
     };
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(bootReceiver != null){
+            unregisterReceiver(bootReceiver);
+        }
+    }
 
 }
