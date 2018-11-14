@@ -84,7 +84,6 @@ public class BindedService extends Service {
                 queue.add(stringRequest);
             }
         }, 0, 1000);//5 Seconds
-
         return super.onStartCommand(intent, flags, startId);
     }
 
